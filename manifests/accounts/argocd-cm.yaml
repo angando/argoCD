@@ -12,4 +12,4 @@ data:
   #   login - allows to login using UI
   accounts.armel: apiKey, login
   # disables user. User is enabled by default
-  accounts.armel.enabled: "false"
+  accounts.armel.enabled: "true"
