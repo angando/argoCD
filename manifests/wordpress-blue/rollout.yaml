@@ -8,12 +8,10 @@ spec:
   selector:
     matchLabels:
       app: wordpress
-      version: green
   template:
     metadata:
       labels:
         app: wordpress
-        version: green
     spec:
       containers:
       - name: wordpress
@@ -36,8 +34,8 @@ spec:
       autoPromotionEnabled: false
 
 ---
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: mysql-green
   namespace: argo-rollout
@@ -46,12 +44,10 @@ spec:
   selector:
     matchLabels:
       app: mysql
-      version: green
   template:
     metadata:
       labels:
         app: mysql
-        version: green
     spec:
       containers:
       - name: mysql

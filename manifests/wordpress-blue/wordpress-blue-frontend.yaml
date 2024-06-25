@@ -8,12 +8,10 @@ spec:
   selector:
     matchLabels:
       app: wordpress
-      version: blue
   template:
     metadata:
       labels:
         app: wordpress
-        version: blue
     spec:
       containers:
       - name: wordpress

@@ -6,7 +6,6 @@ metadata:
 spec:
   selector:
     app: mysql
-    version: blue
   ports:
     - protocol: TCP
       port: 3306

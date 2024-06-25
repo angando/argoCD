@@ -6,7 +6,7 @@ metadata:
   namespace: argo-rollout
   labels:
     app: mysql
-    version: green
+    
 spec:
   selector:
     app: mysql
