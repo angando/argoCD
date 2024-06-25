@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-blue
+  namespace: argo-rollout
+spec:
+  selector:
+    app: wordpress
+    version: blue
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
