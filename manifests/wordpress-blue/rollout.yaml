@@ -1,4 +1,4 @@
-  GNU nano 6.2                                                                   wordpress-blue-green-rollout.yaml                                                                             apiVersion: argoproj.io/v1alpha1
+apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
   name: wordpress
