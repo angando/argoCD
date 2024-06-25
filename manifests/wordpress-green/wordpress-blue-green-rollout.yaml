@@ -21,7 +21,7 @@ spec:
         - containerPort: 80
         env:
         - name: WORDPRESS_DB_HOST
-          value: mysql
+          value: mysql-preview
         - name: WORDPRESS_DB_USER
           value: armel
         - name: WORDPRESS_DB_PASSWORD
