@@ -1,0 +1,89 @@
+  GNU nano 6.2                                                                   wordpress-blue-green-rollout.yaml                                                                             apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: wordpress
+  namespace: argo-rollout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+      version: green
+  template:
+    metadata:
+      labels:
+        app: wordpress
+        version: green
+    spec:
+      containers:
+      - name: wordpress
+        image: wordpress
+        ports:
+        - containerPort: 80
+        env:
+        - name: WORDPRESS_DB_HOST
+          value: mysql-preview
+        - name: WORDPRESS_DB_USER
+          value: armel
+        - name: WORDPRESS_DB_PASSWORD
+          value: password
+        - name: WORDPRESS_DB_NAME
+          value: wordpress
+  strategy:
+    blueGreen:
+      activeService: wordpress-blue
+      previewService: wordpress-preview
+      autoPromotionEnabled: false
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-preview
+  namespace: argo-rollout
+  labels:
+    app: wordpress
+    version: green
+spec:
+  selector:
+    app: wordpress
+    version: green
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-preview
+  namespace: argo-rollout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+      version: green
+  template:
+    metadata:
+      labels:
+        app: mysql
+        version: green
+    spec:
+      containers:
+      - name: mysql
+        image: mysql
+        env:
+        - name: MYSQL_PASSWORD
+          value: password
+        - name: MYSQL_DATABASE
+          value: wordpress
+        - name: MYSQL_USER
+          value: armel
+        - name: MYSQL_RANDOM_ROOT_PASSWORD
+          value: '1'
+        ports:
+        - containerPort: 3306
