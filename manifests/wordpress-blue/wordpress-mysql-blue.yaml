@@ -23,7 +23,7 @@ spec:
           value: wordpress
         - name: MYSQL_USER
           value: root
-        - name: MYSQL_RANDOM_ROOT_PASSWORD:
-          value: '1'      
+        - name: MYSQL_RANDOM_ROOT_PASSWORD
+          value: '1'
         ports:
         - containerPort: 3306
