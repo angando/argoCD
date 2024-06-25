@@ -21,7 +21,7 @@ spec:
           value: password
         - name: MYSQL_DATABASE
           value: wordpress
-       -  name: MYSQL_USER
+        - name: MYSQL_USER
           value: root
       
         ports:
