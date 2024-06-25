@@ -13,6 +13,7 @@ spec:
     metadata:
       labels:
         app: wordpress
+        version: green
     spec:
       containers:
       - name: wordpress
@@ -45,12 +46,12 @@ spec:
   selector:
     matchLabels:
       app: mysql
-      version: blue
+      version: green
   template:
     metadata:
       labels:
         app: mysql
-        version: blue
+        version: green
     spec:
       containers:
       - name: mysql
