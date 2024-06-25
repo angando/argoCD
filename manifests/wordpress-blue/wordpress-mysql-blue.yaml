@@ -8,12 +8,10 @@ spec:
   selector:
     matchLabels:
       app: mysql
-      version: blue
   template:
     metadata:
       labels:
         app: mysql
-        version: blue
     spec:
       containers:
       - name: mysql
