@@ -8,12 +8,10 @@ spec:
   selector:
     matchLabels:
       app: wordpress
-      version: green
   template:
     metadata:
       labels:
         app: wordpress
-        version: green
     spec:
       containers:
       - name: wordpress
@@ -22,7 +20,7 @@ spec:
         - containerPort: 80
         env:
         - name: WORDPRESS_DB_HOST
-          value: mysql-preview
+          value: mysql-green
         - name: WORDPRESS_DB_USER
           value: armel
         - name: WORDPRESS_DB_PASSWORD
@@ -32,46 +30,25 @@ spec:
   strategy:
     blueGreen:
       activeService: wordpress-blue
-      previewService: wordpress-preview
+      previewService: wordpress-green
       autoPromotionEnabled: false
-
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: wordpress-preview
-  namespace: argo-rollout
-  labels:
-    app: wordpress
-    version: green
-spec:
-  selector:
-    app: wordpress
-    version: green
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql-preview
+  name: mysql-green
   namespace: argo-rollout
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: mysql
-      version: green
   template:
     metadata:
       labels:
         app: mysql
-        version: green
+
     spec:
       containers:
       - name: mysql
@@ -87,3 +64,8 @@ spec:
           value: '1'
         ports:
         - containerPort: 3306
+  strategy:
+    blueGreen:
+        activeService: mysql
+        previewService: mysql-green
+        autoPromotionEnabled: false
