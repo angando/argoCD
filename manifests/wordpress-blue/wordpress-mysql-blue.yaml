@@ -12,6 +12,7 @@ spec:
     metadata:
       labels:
         app: mysql
+        version: blue
     spec:
       containers:
       - name: mysql
