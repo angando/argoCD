@@ -21,7 +21,7 @@ spec:
         ports:
         - containerPort: 80
         env:
-        - name: wordpress-blue
+        - name: WORDPRESS_DB_HOST
           value: mysql
         - name: WORDPRESS_DB_USER
           value: root
